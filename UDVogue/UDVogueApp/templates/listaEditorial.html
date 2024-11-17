@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{%block contenido%}
+    <head>
+        <title> Lista de Editoriales </title>
+    </head>
+    <body>
+        <h1> Lista de Editoriales </h1>
+        <ul>
+            {% for editorial in editoriales %}
+                <li>
+                    <a href="{% url 'detalleEditorialHtml' editorial.id %}">
+                        {{ editorial.nombre }} - {{ editorial.cif }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </body>
+{%endblock%}

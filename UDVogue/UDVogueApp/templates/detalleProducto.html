@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{%block contenido%}
+    <head>
+        <title>Detalle del Producto</title>
+    </head>
+
+    <body>
+        <h1>Detalle del Producto</h1>
+        <p><strong>Nombre:</strong> {{ producto.nombreProducto }}</p>
+        <p><strong>Precio:</strong> {{ producto.precio }}</p>
+        <p><strong>Stock:</strong> {{ producto.stock }} unidades</p>
+        <p><strong>Revista:</strong> {{ producto.revista.titulo }}</p>
+    </body>
+{%endblock%}
