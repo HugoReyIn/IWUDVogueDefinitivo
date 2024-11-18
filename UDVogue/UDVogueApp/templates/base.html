@@ -29,14 +29,14 @@
       <!-- owl stylesheets --> 
       <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
       <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+      <link rel="stylesheet" href="{% static 'css/jquery.fancybox.min.css' %}" media="screen">
    </head>
    <body>
       <!-- header section start -->
       <div class="header_section">
          <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
-               <a class="logo" href="index.html"><img src="images/logo.png"></a>
+               <a class="logo" href="index.html"><img src="{% static 'images/logo.png' %}"></a>
                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
                </button>
@@ -375,6 +375,6 @@
       <script src="{% static 'js/custom.js' %}"></script>
       <!-- javascript --> 
       <script src="{% static 'js/owl.carousel.js' %}"></script>
-      <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+      <script src="{% static 'js/uery.fancybox.min.js' %}"></script>
    </body>
 </html>
