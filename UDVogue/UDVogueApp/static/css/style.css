@@ -379,6 +379,96 @@ button {
     height: 11%;
     float: left;
 }
+/*Correccion para que queden en linea*/
+/*.banner_section {
+    width: 100%;
+    float: left;
+    padding-bottom: 90px;
+    background-color: #fae6c4;
+    height: auto;
+    box-shadow: 0px 2px 10px 0px;
+}
+
+.banner_taital {
+    width: 100%;
+    float: left;
+    font-size: 50px;
+    color: #7c2c0c;
+    font-weight: bold;
+    line-height: 60px;
+}
+
+.banner_text {
+    width: 80%;
+    float: left;
+    font-size: 16px;
+    color: #7c2c0c;
+    margin: 0px;
+    padding-top: 30px;
+    font-weight: 500;
+}
+
+.btn_main {
+    width: 100%;
+    float: left;
+    padding-top: 50px;
+}
+
+.contact_bt {
+    width: 170px;
+    float: left;
+}
+
+.contact_bt a {
+    width: 100%;
+    float: left;
+    font-size: 18px;
+    color: #7c2c0c;
+    background-color: transparent;
+    border: 1px solid #b48569;
+    padding: 8px 5px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.contact_bt a:hover {
+    color: #ffffff;
+    background-color: #7c2c0c;
+}
+
+#main_slider a.carousel-control-next {
+    position: absolute;
+    right: 615px;
+    top: 90%;
+}
+
+#main_slider a.carousel-control-prev {
+    position: absolute;
+    left: 615px;
+    top: 90%;
+}
+
+#main_slider .carousel-control-prev,
+#main_slider .carousel-control-next {
+    width: 55px;
+    height: 55px;
+    background: transparent;
+    opacity: 1;
+    font-size: 20px;
+    color: #7c2c0c;
+    border: 1px solid #757068;
+    border-radius: 100px;
+}
+
+#main_slider .carousel-control-prev:hover,
+#main_slider .carousel-control-next:hover,
+#main_slider .carousel-control-prev:focus,
+#main_slider .carousel-control-next:focus {
+    color: #000;
+}
+*/
+
+
 /* banner section end */
 
 
@@ -413,14 +503,14 @@ button {
 }
 
 .image_2 {
-    width: 80%;
+    width: 70%;
     float: left;
     border: 1px solid black;
     padding: 40px;
     margin: 30px 0px 0px 115px;
 }
 
-/*.image_2::after {
+.image_2::after {
     content: '';
     position: absolute;
     width: 100px;
@@ -429,9 +519,9 @@ button {
     left: 100px;
     right: initial;
     top: 0px;
-}*/
+}
 
-.image_2::before {
+/*.image_2::before {
     content: '';
     position: absolute;
     width: 100px;
@@ -440,7 +530,7 @@ button {
     left: initial;
     right: 0px;
     bottom: 0px;
-}
+}*/
 
 .readmore_bt {
     width: 170px;
