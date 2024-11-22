@@ -43,19 +43,19 @@
                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav mr-auto">
                      <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link" href="index.html">Inicio</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="about.html">About</a>
+                        <a class="nav-link" href="shop.html">Tienda</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="design.html">Our Design</a>
+                        <a class="nav-link" href="design.html">Revistas</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="shop.html">Shop</a>
+                        <a class="nav-link" href="about.html">¿Quiénes somos?</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact Us</a>
+                        <a class="nav-link" href="contact.html">¡Contáctanos!</a>
                      </li>
                   </ul>
                   <form class="form-inline my-2 my-lg-0">
@@ -86,7 +86,7 @@
                            </div>
                         </div>
                         <div class="col-md-6">
-                           <div class="image_1"><img src="{% static 'images/Portada1.png' %}"></div>
+                           <div id="portada1"><img src="{% static 'images/Portada1.png' %}"></div>
                         </div>
                      </div>
                   </div>
@@ -96,23 +96,23 @@
                      <div class="row">
                         <div class="col-md-6">
                            <h1 class="banner_taital">Sencillez <br> con gran <br>estilo</h1>
-                           <p class="banner_text">It is a long established fact that a reader will bedistracted by the readable content of </p>
+                           <p class="banner_text">Descubre la magia de lo simple con prendas casuales que combinan comodidad y distinción. ¡Un look que habla por ti!</p>
                            <div class="btn_main">
-                              <div class="contact_bt"><a href="#">Contact US</a></div>
+                              <div class="contact_bt"><a href="#">¡Contáctanos!</a></div>
                            </div>
                         </div>
                         <div class="col-md-6">
-                           <div class="image_1"><img src="{% static 'images/Portada2.png' %}"></div>
+                           <div id="portada2"><img src="{% static 'images/Portada2.png' %}"></div>
                         </div>
                      </div>
                   </div>
                </div>
             </div>
             <a class="carousel-control-prev" href="#main_slider" role="button" data-slide="prev">
-            <i style="font-style: initial;"><img src="{% static 'images/flechaIzquierda.png' %}" alt="Flecha izquierda" class="flechas"></i>
+            <i style="font-style: initial;"> << </i>
             </a>
             <a class="carousel-control-next" href="#main_slider" role="button" data-slide="next">
-            <i style="font-style: initial;"><img src="{% static 'images/flechaDerecha.png' %}" alt="Flecha Derecha" class="flechas"></i>
+            <i style="font-style: initial;"> >> </i>
             </a>
          </div>
       </div>
@@ -126,10 +126,10 @@
                      <div class="image_2"><img src="{% static 'images/Pasarela.jpg' %}"></div>
                   </div>
                   <div class="col-md-6">
-                     <h1 class="about_taital">About Us</h1>
+                     <h1 class="about_taital">¿Quiénes somos?</h1>
                      <!--<p class="about_text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised </p>-->
                      {%block contenido%} {%endblock%}
-                     <div class="readmore_bt"><a href="#">Read More</a></div>
+                     <div class="readmore_bt"><a href="#">Información extra</a></div>
                   </div>
                </div>
             </div>
@@ -289,7 +289,7 @@
                   <div class="col-md-6">
                      <div class="map_main">
                         <div class="map-responsive">
-                           <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&amp;q=Eiffel+Tower+Paris+France" width="600" height="360" frameborder="0" style="border:0; width: 100%;" allowfullscreen=""></iframe>
+                           <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d244.4815321397388!2d-2.9357747753367542!3d43.26283519753031!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4e4fd8274a772b%3A0xd31a0f5b591a56c8!2sClaire&#39;s!5e1!3m2!1ses!2ses!4v1732225723762!5m2!1ses!2ses" width="600" height="360" frameborder="0" style="border:0; width: 100%;" allowfullscreen=""></iframe>
                         </div>
                      </div>
                   </div>

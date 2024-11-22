@@ -246,11 +246,6 @@ button {
     border-bottom: 20px solid black;
 }
 
-.image_1 {
-    width: 100%;
-    float: left;
-}
-
 .logo {
     width: 44%;
     float: left;
@@ -282,7 +277,6 @@ button {
 .navbar-light .navbar-nav .nav-link:hover {
     color: lightgray;
 }
-
 /* header section end */
 
 
@@ -339,8 +333,8 @@ button {
 }
 
 .contact_bt a:hover {
-    color: white;
-    background-color: #666666;
+    color: black;
+    background-color: white;
 }
 
 #main_slider a.carousel-control-next {
@@ -374,16 +368,21 @@ button {
     color: black;
 }
 
-.flechas {
-    width: 60%;
+#portada1 {
+    width: 100%;
+    height: auto;
+    float: left;
 }
 
-
+#portada2 {
+    width: auto;
+    height: 11%;
+    float: left;
+}
 /* banner section end */
 
 
 /* about section start */
-
 .about_section {
     width: 100%;
     float: left;
@@ -393,7 +392,7 @@ button {
     width: 100%;
     float: left;
     font-size: 30px;
-    color: #7c2c0c;
+    color: black;
     font-weight: bold;
     padding-top: 150px;
 }
@@ -402,7 +401,7 @@ button {
     width: 100%;
     float: left;
     font-size: 16px;
-    color: #535353;
+    color: black;
     margin: 0px;
 }
 
@@ -414,14 +413,14 @@ button {
 }
 
 .image_2 {
-    width: 60%;
+    width: 80%;
     float: left;
-    border: 1px solid #7c2c0c;
+    border: 1px solid black;
     padding: 40px;
     margin: 30px 0px 0px 115px;
 }
 
-.image_2::after {
+/*.image_2::after {
     content: '';
     position: absolute;
     width: 100px;
@@ -430,7 +429,7 @@ button {
     left: 100px;
     right: initial;
     top: 0px;
-}
+}*/
 
 .image_2::before {
     content: '';
@@ -453,25 +452,22 @@ button {
     width: 100%;
     float: left;
     font-size: 18px;
-    color: #7c2c0c;
-    background-color: transparent;
-    border: 1px solid #b48569;
+    color: white;
+    background-color: black;
+    border: 1px solid black;
     padding: 8px 5px;
     text-align: center;
     font-weight: 500;
 }
 
 .readmore_bt a:hover {
-    color: #ffffff;
-    background-color: #7c2c0c;
+    color: black;
+    background-color: white;
 }
-
-
 /* about section end */
 
 
 /* design section start */
-
 .design_section {
     width: 100%;
     float: left;
@@ -486,7 +482,7 @@ button {
     width: 100%;
     float: left;
     font-size: 40px;
-    color: #7c2c0c;
+    color: black;
     text-align: center;
     font-weight: bold;
 }
@@ -495,7 +491,7 @@ button {
     width: 100%;
     float: left;
     font-size: 16px;
-    color: #535353;
+    color: black;
     text-align: center;
     margin: 0px;
 }
@@ -508,19 +504,19 @@ button {
 
 .box_main {
     width: 100%;
-    border: 1px solid #aa7662;
+    border: 1px solid black;
     padding: 50px;
 }
 
 .box_main:hover {
-    background-color: #efe4d1;
+    background-color: #dedede;
     border: transparent;
 }
 
 .chair_text {
     width: 100%;
     font-size: 18px;
-    color: #7c2c0c;
+    color: black;
     text-align: center;
     margin: 0px;
     font-weight: 500;
@@ -536,7 +532,7 @@ button {
 .image_4 {
     width: 100%;
     text-align: center;
-    padding-top: 120px;
+    padding-top: 100px;
     min-height: 332px;
 }
 
@@ -551,7 +547,7 @@ button {
     width: 100%;
     font-size: 18px;
     color: #ffffff;
-    background-color: #7c2c0c;
+    background-color: black;
     padding: 8px 25px;
     text-align: center;
     text-transform: uppercase;
@@ -560,8 +556,8 @@ button {
 }
 
 .buy_bt a:hover {
-    color: #ffffff;
-    background-color: #7c2c0c;
+    color: black;
+    background-color: white;
 }
 
 #my_slider a.carousel-control-next {
@@ -619,8 +615,6 @@ button {
     color: #ffffff;
     background-color: #7c2c0c;
 }
-
-
 /* design section end */
 
 
