@@ -145,42 +145,47 @@
       <!--  design section start -->
       <div class="design_section layout_padding">
          <div id="my_slider" class="carousel slide" data-ride="carousel">
-             <div class="carousel-inner">
-                 <div class="carousel-item active">
-                     <div class="container">
-                         <h1 class="design_taital">Nuestras revistas</h1>
-                         <p class="design_text">¡Descubre el producto perfecto en nuestra amplia colección de revistas, donde siempre encontrarás algo único para ti!</p>
-                         <div class="design_section_2">
-                             <div class="row">
-                                 {% for revista in revistas %}
-                                 <div class="col-md-4">
-                                     <div class="box_main">
-                                         <p class="chair_text">{{ revista.titulo }}</p>
-                                         <div class="image_3">
-                                             <img src="{{ revista.imagen.url }}" alt="{{ revista.titulo }}">
-                                         </div>
-                                         <div class="buy_bt"><a href="#">Explorar</a></div>
-                                     </div>
+            <div class="carousel-inner">
+               {% for revista in revistas|slice:":3" %}
+               <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %}">
+                  <div class="container">
+                     <h1 class="design_taital">Nuestras revistas</h1>
+                     <p class="design_text">¡Descubre el producto perfecto en nuestra amplia colección de revistas, donde siempre encontrarás algo único para ti!</p>
+                     <div class="design_section_2">
+                        <div class="row">
+                           {% for revista in revistas %}
+                           <div class="col-md-4">
+                              <div class="box_main">
+                                 <p class="chair_text">{{ revista.titulo }}</p>
+                                 <div class="image_3">
+                                    <img src="{{ revista.imagen.url }}" alt="{{ revista.titulo }}">
                                  </div>
-                                 {% if forloop.counter|divisibleby:3 %}
-                             </div>
-                             <div class="row">
-                                 {% endif %}
-                                 {% endfor %}
-                             </div>
-                         </div>
+                                 <div class="buy_bt"><a href="#">Explorar</a></div>
+                              </div>
+                           </div>
+                           {% if forloop.counter|divisibleby:3 %}
+                        </div>
+                        <div class="row">
+                           {% endif %}
+                           {% endfor %}
+                        </div>
                      </div>
-                 </div>
-             </div>
-             <a class="carousel-control-prev" href="#my_slider" role="button" data-slide="prev">
-                 <i class="fa fa-long-arrow-left" style="font-size:24px"></i>
-             </a>
-             <a class="carousel-control-next" href="#my_slider" role="button" data-slide="next">
-                 <i class="fa fa-long-arrow-right" style="font-size:24px"></i>
-             </a>
+                  </div>
+               </div>
+               {% endfor %}
+            </div>
+
+            <!-- Botones de navegación -->
+            <a class="carousel-control-prev" href="#my_slider" role="button" data-slide="prev">
+               <i class="fa fa-long-arrow-left" style="font-size:24px"></i>
+            </a>
+            <a class="carousel-control-next" href="#my_slider" role="button" data-slide="next">
+               <i class="fa fa-long-arrow-right" style="font-size:24px"></i>
+            </a>
          </div>
-     </div>
+      </div>
       <!--  design section end -->
+
 
 
       <!--  newsletter section start -->
