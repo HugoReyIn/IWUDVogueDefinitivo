@@ -3,7 +3,8 @@ from django.http import HttpResponse
 from .models import Editorial, Revista, Producto
 
 def index(request):
-    return render(request, 'index.html')
+    lRevistas = Revista.objects.all() 
+    return render(request, 'index.html', {'revistas': lRevistas})
 
 def listaEditoriales(request):
     editoriales = Editorial.objects.order_by('nombre')

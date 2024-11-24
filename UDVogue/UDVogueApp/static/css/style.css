@@ -587,6 +587,20 @@ button {
     margin: 0 auto;
     padding-top: 150px;
 }
+
+.carousel-inner {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.carousel-item {
+    flex: 0 0 33.3333%; /* Para mostrar 3 ítems por vez */
+    display: block;
+}
+
+.carousel-control-prev, .carousel-control-next {
+    display: none; /* Si no quieres que se vean los controles del carrusel */
+}
 /* design section end */
 
 
@@ -616,9 +630,9 @@ button {
     width: 100%;
     float: left;
     background-color: transparent;
-    border: 1px solid black;
+    border: 1px solid #8e8e8e;
     padding: 8px 15px;
-    color: black;
+    color: #4f4e4e;
     font-size: 20px;
     margin-top: 30px;
 }
@@ -654,7 +668,6 @@ input.email_text::placeholder {
 
 
 /* contact section start */
-
 .contact_section {
     width: 100%;
     float: left;
@@ -665,7 +678,7 @@ input.email_text::placeholder {
     width: 100%;
     float: left;
     font-size: 40px;
-    color: #7c2c0c;
+    color: black;
     font-weight: bold;
 }
 
@@ -685,7 +698,7 @@ input.email_text::placeholder {
     font-size: 16px;
     color: #4f4e4e;
     border: 1px solid #8e8e8e;
-    background-color: #ffff;
+    background-color: white;
     padding: 15px;
     margin-top: 20px;
     border-radius: 5px;
@@ -713,19 +726,19 @@ input.email_text::placeholder {
 .send_bt a {
     width: 100%;
     float: left;
-    background-color: #7c2c0c;
-    color: #ffffff;
+    background-color: black;
+    color: white;
     text-align: center;
     padding: 10px 0px;
     font-size: 16px;
     margin-top: 40px;
-    border: 1px solid #7c2c0c;
+    border: 1px solid black;
     font-weight: 500;
 }
 
 .send_bt a:hover {
-    background-color: transparent;
-    color: #7c2c0c;
+    background-color: white;
+    color: black;
 }
 
 .map_main {
@@ -733,8 +746,6 @@ input.email_text::placeholder {
     float: left;
     padding-top: 80px;
 }
-
-
 /* contact section end */
 
 

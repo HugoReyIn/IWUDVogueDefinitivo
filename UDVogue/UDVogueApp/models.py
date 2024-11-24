@@ -16,12 +16,12 @@ class Editorial(models.Model):
 class Revista(models.Model):
     editorial = models.ForeignKey(Editorial, on_delete = models.CASCADE, related_name = "revistas", null = True)
     titulo = models.CharField(max_length=50, null = True)
+    imagen = models.ImageField(upload_to='revistas/', null = True)
     numeroEdicion = models.IntegerField(default = 1)
     fechaPublicacion = models.DateField(null = True)
 
     def __str__(self):
-        return f"{self.titulo} (Edición {self.numeroEdicion})"
-
+        return self.titulo
 
 class Producto(models.Model):
     revista = models.ForeignKey(Revista, on_delete = models.CASCADE, related_name = "productos", null = True)
