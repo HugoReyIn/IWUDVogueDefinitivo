@@ -4,7 +4,8 @@ from .models import Editorial, Revista, Producto
 
 def index(request):
     lRevistas = Revista.objects.all() 
-    return render(request, 'index.html', {'revistas': lRevistas})
+    grupoRevistas = [lRevistas[i:i+3] for i in range(0, len(lRevistas), 3)]
+    return render(request, 'index.html', {'gruposRevistas': grupoRevistas})
 
 def listaEditoriales(request):
     editoriales = Editorial.objects.order_by('nombre')

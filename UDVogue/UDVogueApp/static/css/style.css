@@ -587,20 +587,6 @@ button {
     margin: 0 auto;
     padding-top: 150px;
 }
-
-.carousel-inner {
-    display: flex;
-    flex-wrap: nowrap;
-}
-
-.carousel-item {
-    flex: 0 0 33.3333%; /* Para mostrar 3 ítems por vez */
-    display: block;
-}
-
-.carousel-control-prev, .carousel-control-next {
-    display: none; /* Si no quieres que se vean los controles del carrusel */
-}
 /* design section end */
 
 
