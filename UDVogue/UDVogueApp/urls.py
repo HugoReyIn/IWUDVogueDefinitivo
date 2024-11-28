@@ -22,6 +22,5 @@ urlpatterns = [
     path('productosHtml/', views.listaProductosHtml, name = 'listaProductosHtml'),
     path('productosHtml/<int:id_producto>', views.detalleProductoHtml, name = 'detalleProductoHtml'),
 
-    path('revista/<int:id>/', views.detalle_revista, name='detalle_revista'),
-
+    #path('revista/<int:id>/', views.detalleRevistaHtml, name='detalle_revista'),
 ]
