@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+<div class="detalle-revista">
+    <h1>{{ revista.titulo }}</h1>
+    <img src="{{ revista.imagen.url }}" alt="{{ revista.titulo }}">
+    <p>{{ revista.descripcion }}</p>
+</div>
+{% endblock %}

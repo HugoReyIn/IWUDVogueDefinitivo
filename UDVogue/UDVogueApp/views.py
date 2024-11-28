@@ -43,6 +43,7 @@ def detalleRevista(request, id_revista):
     else:
         cadenaDeTexto += "Esta revista no tiene productos en estos momentos."
 
+    #return render(request, 'detalle_revista.html', {'revista': revista})    
     return HttpResponse(cadenaDeTexto)
 
 def listaProductos(request):
