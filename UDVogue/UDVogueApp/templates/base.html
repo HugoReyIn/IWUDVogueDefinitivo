@@ -1,5 +1,3 @@
-{% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -36,49 +34,121 @@
       <div class="header_section">
          <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
-               <a class="logo" href="{% url 'home' %}"><img src="{% static 'images/UDVogueLogo.png' %}" alt="UDVogue Logo"></a>
+               <a class="logo" href="index.html"><img src="{% static 'images/UDVogueLogo.png' %}"></a>
                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
                </button>
                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav mr-auto">
-                     <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Inicio</a></li>
-                     <li class="nav-item"><a class="nav-link" href="{% url 'shop' %}">Tienda</a></li>
-                     <li class="nav-item"><a class="nav-link" href="#revistas">Revistas</a></li>
-                     <li class="nav-item"><a class="nav-link" href="#about">Conócenos</a></li>
-                     <li class="nav-item"><a class="nav-link" href="#contact">¡Contáctanos!</a></li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="shop.html">Tienda</a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="#revistas">Revistas</a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="#about">Conócenos</a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="#contact">¡Contáctanos!</a>
+                     </li>
                   </ul>
+                  <form class="form-inline my-2 my-lg-0">
+                     <div class="search_icon">
+                        <ul>
+                           <li><a href="#"><img src="{% static 'images/search-icon.png' %}"></a></li>
+                           <li><a href="#"><img src="{% static 'images/user-icon.png' %}"></a></li>
+                        </ul>
+                     </div>
+                  </form>
                </div>
-            </div>
          </nav>
+         </div>
       </div>
       <!-- header section end -->
+
 
       <!-- banner section start -->
       <div class="banner_section layout_padding">
          <div id="main_slider" class="carousel slide" data-ride="carousel">
-            <!-- Carousel content -->
+            <div class="carousel-inner">
+               <div class="carousel-item active">
+                  <div class="container">
+                     <div class="row">
+                        <div class="col-md-6">
+                           <h1 class="banner_taital">Elegancia <br> en cada <br>detalle</h1>
+                           <p class="banner_text"> Descubre prendas únicas y accesorios exclusivos donde cada detalle respira elegancia y sofisticación. ¡Tu estilo merece lo mejor! </p>
+                           <div class="btn_main">
+                              <div class="contact_bt"><a href="#">¡Contáctanos!</a></div>
+                           </div>
+                        </div>
+                        <div class="col-md-6">
+                           <div id="portada1"><img src="{% static 'images/Portada1.png' %}"></div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="carousel-item">
+                  <div class="container">
+                     <div class="row">
+                        <div class="col-md-6">
+                           <h1 class="banner_taital">Sencillez <br> con gran <br>estilo</h1>
+                           <p class="banner_text">Descubre la magia de lo simple con prendas casuales que combinan comodidad y distinción. ¡Un look que habla por ti!</p>
+                           <div class="btn_main">
+                              <div class="contact_bt"><a href="#">¡Contáctanos!</a></div>
+                           </div>
+                        </div>
+                        <div class="col-md-6">
+                           <div id="portada2"><img src="{% static 'images/Portada2.png' %}"></div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <a class="carousel-control-prev" href="#main_slider" role="button" data-slide="prev">
+            <i style="font-style: initial;"><<</i>
+            </a>
+            <a class="carousel-control-next" href="#main_slider" role="button" data-slide="next">
+            <i style="font-style: initial;">>></i>
+            </a>
          </div>
       </div>
       <!-- banner section end -->
 
+
       <!-- about section start -->
       <div id="about" class="about_section layout_padding">
          <div class="container">
-            <h1 class="about_taital">¿Quiénes somos?</h1>
-            <p>Tu contenido aquí...</p>
+            <div class="about_section_2">
+               <div class="row">
+                  <div class="col-md-6">
+                     <div class="image_2"><img src="{% static 'images/Pasarela.jpg' %}"></div>
+                  </div>
+                  <div class="col-md-6">
+                     <h1 class="about_taital">¿Quiénes somos?</h1>
+                     <!--<p class="about_text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised </p>-->
+                     {%block contenido%} {%endblock%}
+                     <div class="readmore_bt"><a href="#">Más información</a></div>
+                  </div>
+               </div>
+            </div>
          </div>
       </div>
       <!-- about section end -->
 
-      <!-- design section start -->
+      
+      <!--  design section start -->
       <div class="design_section layout_padding">
          <div id="my_slider" class="carousel slide" data-ride="carousel">
             <div id="revistas" class="carousel-inner">
                {% for grupo in gruposRevistas %}
                <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                  <div class="container">
+                  <div class="container" id="Revistas">
                      <h1 class="design_taital">Nuestras revistas</h1>
+                     <p class="design_text">¡Descubre el producto perfecto en nuestra amplia colección de revistas, donde siempre encontrarás algo único para ti!</p>
                      <div class="design_section_2">
                         <div class="row">
                            {% for revista in grupo %}
@@ -88,9 +158,7 @@
                                  <div class="image_3">
                                     <img src="{{ revista.imagen.url }}" alt="{{ revista.titulo }}">
                                  </div>
-                                 <div class="buy_bt">
-                                    <a href="{% url 'detalle_revista' revista.id %}" target="_blank">Explorar</a>
-                                 </div>
+                                 <div class="buy_bt"><a href="#">Explorar</a></div>
                               </div>
                            </div>
                            {% endfor %}
@@ -100,21 +168,142 @@
                </div>
                {% endfor %}
             </div>
+            <a class="carousel-control-prev" href="#my_slider" role="button" data-slide="prev">
+               <i class="fa fa-long-arrow-left" style="font-size:24px"></i>
+            </a>
+            <a class="carousel-control-next" href="#my_slider" role="button" data-slide="next">
+               <i class="fa fa-long-arrow-right" style="font-size:24px"></i>
+            </a>
+         </div>
+         <div class="extraContainer"></div>
+      </div>
+      <!--  design section end -->
+
+
+      <!--  newsletter section start -->
+      <div class="newsletter_section layout_padding">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-6">
+                  <div class="imgage_6"><img src="{% static 'images/Newsletter.jpg' %}"></div>
+               </div>
+               <div class="col-md-6">
+                  <h1 class="newsletter_taital">¡Descubre ofertas únicas!</h1>
+                  <input type="text" class="email_text" placeholder="Introduce tu email" name="Enter Your Email">
+                  <div class="subscribe_bt"><a href="#">Suscríbete</a></div>
+               </div>
+            </div>
          </div>
       </div>
-      <!-- design section end -->
+      <!--  newsletter section end -->
+
+
+      <!-- contact section start -->
+      <div id="contact" class="contact_section layout_padding">
+         <div class="container">
+            <div class="contact_section_2">
+               <div class="row">
+                  <div class="col-md-6">
+                     <div class="mail_section_1">
+                        <h1 class="contact_taital">¡Contáctanos!</h1>
+                        <input type="text" class="mail_text" placeholder="Nombre" name="text">
+                        <input type="text" class="mail_text" placeholder="Correo electrónicos" name="text">
+                        <input type="text" class="mail_text" placeholder="Número de teléfono" name="text">
+                        <textarea class="massage-bt" placeholder="Comentarios" rows="5" id="comment" name="Massage"></textarea>
+                        <div class="send_bt"><a href="#">ENVIAR</a></div>
+                     </div>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="map_main">
+                        <div class="map-responsive">
+                           <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d410.53283066091524!2d-2.9309043090599958!3d43.26219955019639!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1ses!2ses!4v1732299123201!5m2!1ses!2ses" width="600" height="360" frameborder="0" style="border:0; width: 100%;" allowfullscreen=""></iframe>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- contact section end -->
+
 
       <!-- footer section start -->
       <div class="footer_section">
          <div class="container">
-            <p>&copy; 2024 UDVogue. Todos los derechos reservados.</p>
+            <div class="footer_location_text">
+               <ul>
+                  <li><img src="{% static 'images/map-icon.png' %}"><span class="padding_left_10"><a href="#">Loram Ipusm hosting web</a></span></li>
+                  <li><img src="{% static 'images/call-icon.png' %}"><span class="padding_left_10"><a href="#">Call : +7586656566</a></span></li>
+                  <li><img src="{% static 'images/mail-icon.png' %}"><span class="padding_left_10"><a href="#">demo@gmail.com</a></span></li>
+               </ul>
+            </div>
+            <div class="row">
+               <div class="col-lg-3 col-sm-6">
+                  <h2 class="useful_text">Useful link </h2>
+                  <div class="footer_menu">
+                     <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="design.html">Our Designe</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                     </ul>
+                  </div>
+               </div>
+               <div class="col-lg-3 col-sm-6">
+                  <h2 class="useful_text">Repair</h2>
+                  <p class="lorem_text">Lorem ipsum dolor sit amet, consectetur  adipiscinaliqua  Loreadipiscing </p>
+               </div>
+               <div class="col-lg-3 col-sm-6">
+                  <h2 class="useful_text">Social Media</h2>
+                  <div id="social">
+                     <a class="facebookBtn smGlobalBtn active" href="#" ></a>
+                     <a class="twitterBtn smGlobalBtn" href="#" ></a>
+                     <a class="googleplusBtn smGlobalBtn" href="#" ></a>
+                     <a class="linkedinBtn smGlobalBtn" href="#" ></a>
+                  </div>
+               </div>
+               <div class="col-sm-6 col-lg-3">
+                  <h1 class="useful_text">Our Repair center</h1>
+                  <p class="footer_text">Lorem ipsum dolor sit amet, consectetur adipiscinaliquaLoreadipiscing </p>
+               </div>
+            </div>
          </div>
       </div>
       <!-- footer section end -->
 
-      <!-- Javascript -->
+
+      <!-- copyright section start -->
+      <div class="copyright_section">
+         <div class="container">
+            <p class="copyright_text">©UDVogue 2024. Todos los derechos reservados.</p>
+         </div>
+      </div>
+      <!-- copyright section end -->
+
+
+      <!-- Javascript files-->
       <script src="{% static 'js/jquery.min.js' %}"></script>
       <script src="{% static 'js/popper.min.js' %}"></script>
-      <script src="{% static 'js/bootstrap.min.js' %}"></script>
+      <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+      <script src="{% static 'js/jquery-3.0.0.min.js' %}"></script>
+      <script src="{% static 'js/plugin.js' %}"></script>
+      <!-- sidebar -->
+      <script src="{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+      <script src="{% static 'js/custom.js' %}"></script>
+      <!-- javascript --> 
+      <script src="{% static 'js/owl.carousel.js' %}"></script>
+      <script src="{% static 'js/uery.fancybox.min.js' %}"></script>
+
+      <script>
+         document.querySelectorAll('a.nav-link').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+               e.preventDefault();
+               const target = document.querySelector(this.getAttribute('href'));
+               if (target) {
+                  target.scrollIntoView({ behavior: 'smooth' });
+               }
+            });
+         });
+      </script>
    </body>
 </html>
