@@ -27,7 +27,7 @@ class Producto(models.Model):
     revista = models.ForeignKey(Revista, on_delete = models.CASCADE, related_name = "productos", null = True)
     nombreProducto = models.CharField(max_length = 60, null = True)
     talla = models.CharField(max_length = 3, default = 'M')
-    color = models.CharField(max_length = 10, default = 'negro')
+    imagen = models.ImageField(upload_to='productos/', null = True)
     precio = models.DecimalField(max_digits = 5, decimal_places = 2, default = 0.00)
     stock = models.IntegerField(default = 0)
 

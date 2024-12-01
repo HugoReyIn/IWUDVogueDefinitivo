@@ -43,7 +43,6 @@ def detalleRevista(request, id_revista):
     else:
         cadenaDeTexto += "Esta revista no tiene productos en estos momentos."
 
-    #return render(request, 'detalle_revista.html', {'revista': revista})    
     return HttpResponse(cadenaDeTexto)
 
 def listaProductos(request):
@@ -78,7 +77,7 @@ def detalleProducto(request, id_producto):
 
     return HttpResponse(cadenaDeTexto)
 
-# Vistas basadas en plantillas
+
 def listaEditorialHtml(request):
     lEditoriales = Editorial.objects.order_by('nombre')
     contexto = {'editoriales': lEditoriales}
@@ -97,7 +96,8 @@ def listaRevistasHtml(request):
 def detalleRevistaHtml(request, id_revista):
     revista = get_object_or_404(Revista, pk=id_revista)
     contexto = {'revista': revista}
-    return render(request, 'detalleRevista.html', contexto)
+    #return render(request, 'detalleRevista.html', contexto)
+    return render(request, 'detalle_revista.html', {'revista': revista})
 
 def listaProductosHtml(request):
     lProductos = Producto.objects.order_by('nombreProducto')
