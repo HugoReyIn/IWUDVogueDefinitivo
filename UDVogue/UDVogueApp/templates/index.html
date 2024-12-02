@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
-{%block contenido%}
-    <head>
-        <title>Vista de Modelo</title>
-    </head>
-    <body>
-        <h1>Menú Principal</h1>
-        <p>Elige una opción:</p>
-        <ul>
-            <li><a href="{% url 'listaProductosHtml' %}">Ver Lista de Productos</a></li>
-            <li><a href="{% url 'listaRevistasHtml' %}">Ver Lista de Revista</a></li>
-            <li><a href="{% url 'listaEditorialHtml' %}">Ver lista de Editorial</a></li>
-        </ul>
-    </body>
-{%endblock%}
+{% block contenido %}
+<head>
+    <title>Vista de Modelo</title>
+</head>
+<body>
+    <h1>Menú Principal</h1>
+    <p>Elige una opción:</p>
+    <ul>
+        <li><a href="{% url 'listaProductos' %}">Ver Lista de Productos</a></li>
+        <li><a href="{% url 'listaRevistas' %}">Ver Lista de Revistas</a></li>
+        <li><a href="{% url 'listaEditoriales' %}">Ver Lista de Editoriales</a></li>
+    </ul>
+</body>
+{% endblock %}
