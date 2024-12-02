@@ -140,6 +140,8 @@ def contact_view(request):
         if form.is_valid():
             nombre = form.cleaned_data['nombre']
             return HttpResponse(f"¡Gracias por contactarnos, {nombre}!")
+        else:
+            return HttpResponse("Formulario no válido", status=400)
     else:
         form = ContactForm()
     return render(request, 'contact.html', {'form': form})
