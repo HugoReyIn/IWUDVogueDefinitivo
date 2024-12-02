@@ -1,26 +1,20 @@
 from django.urls import path
-from . import views
+from .views import (
+    IndexView,
+    ListaEditorialesView, DetalleEditorialView,
+    ListaRevistasView, DetalleRevistaView,
+    ListaProductosView, DetalleProductoView
+)
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', IndexView.as_view(), name='index'),
     
-    path('editoriales/', views.listaEditoriales, name = 'listaEditoriales'),
-    path('editoriales/<int:id_editorial>', views.detalleEditorial, name = 'detalleEditorial'),
+    path('editoriales/', ListaEditorialesView.as_view(), name='listaEditoriales'),
+    path('editoriales/<int:pk>/', DetalleEditorialView.as_view(), name='detalleEditorial'),
     
-    path('revistas/', views.listaRevistas, name = 'listaRevistas'),
-    path('revistas/<int:id_revista>', views.detalleRevista, name = 'detalleRevista'),
+    path('revistas/', ListaRevistasView.as_view(), name='listaRevistas'),
+    path('revistas/<int:pk>/', DetalleRevistaView.as_view(), name='detalleRevista'),
 
-    path('productos/', views.listaProductos, name = 'listaProductos'),
-    path('productos/<int:id_producto>', views.detalleProducto, name = 'detalleProducto'),
-
-    path('editorialesHtml/', views.listaEditorialHtml, name = 'listaEditorialHtml'),
-    path('editorialesHtml/<int:id_editorial>', views.detalleEditorialHtml, name = 'detalleEditorialHtml'),
-
-    path('revistasHtml/', views.listaRevistasHtml, name = 'listaRevistasHtml'),
-    path('revistasHtml/<int:id_revista>', views.detalleRevistaHtml, name = 'detalleRevistaHtml'),
-
-    path('productosHtml/', views.listaProductosHtml, name = 'listaProductosHtml'),
-    path('productosHtml/<int:id_producto>', views.detalleProductoHtml, name = 'detalleProductoHtml'),
-
-    #path('revista/<int:id>/', views.detalleRevistaHtml, name='detalle_revista'),
+    path('productos/', ListaProductosView.as_view(), name='listaProductos'),
+    path('productos/<int:pk>/', DetalleProductoView.as_view(), name='detalleProducto'),
 ]
