@@ -1,7 +1,8 @@
 from django.views.generic import TemplateView, ListView, DetailView
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from .models import Editorial, Revista, Producto
+from .forms import ContactForm
 
 class IndexView(TemplateView):
     template_name = 'index.html'
@@ -132,3 +133,13 @@ class DetalleProductoView(DetailView):
             )
             return HttpResponse(cadenaDeTexto)
         return super().render_to_response(context, **response_kwargs)
+
+def contact_view(request):
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            nombre = form.cleaned_data['nombre']
+            return HttpResponse(f"¡Gracias por contactarnos, {nombre}!")
+    else:
+        form = ContactForm()
+    return render(request, 'contact.html', {'form': form})

@@ -1,4 +1,5 @@
 from django.urls import path
+from .views import contact_view
 from .views import (
     IndexView,
     ListaEditorialesView, DetalleEditorialView,
@@ -8,6 +9,7 @@ from .views import (
 
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
+    path('contact/', contact_view, name='contact'),
     
     path('editoriales/', ListaEditorialesView.as_view(), name='listaEditoriales'),
     path('editoriales/<int:pk>/', DetalleEditorialView.as_view(), name='detalleEditorial'),
