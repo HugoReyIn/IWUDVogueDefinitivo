@@ -1,110 +1,134 @@
-from django.shortcuts import render, get_object_or_404
+from django.views.generic import TemplateView, ListView, DetailView
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 from .models import Editorial, Revista, Producto
 
-def index(request):
-    lRevistas = Revista.objects.all() 
-    grupoRevistas = [lRevistas[i:i+3] for i in range(0, len(lRevistas), 3)]
-    return render(request, 'index.html', {'gruposRevistas': grupoRevistas})
+class IndexView(TemplateView):
+    template_name = 'index.html'
 
-def listaEditoriales(request):
-    editoriales = Editorial.objects.order_by('nombre')
-    cadenaDeTexto = ', '.join([editorial.nombre for editorial in editoriales])
-    return HttpResponse(cadenaDeTexto)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        lRevistas = Revista.objects.all()
+        context['gruposRevistas'] = [lRevistas[i:i+3] for i in range(0, len(lRevistas), 3)]
+        return context
 
-def detalleEditorial(request, id_editorial):
-    editorial = get_object_or_404(Editorial, pk=id_editorial)
-    lRevistas = editorial.revistas.all()
-    cadenaDeTexto = f"Editorial: {editorial.nombre}, CIF: {editorial.cif}\n"
-    cadenaDeTexto += "Revistas publicadas:\n"
 
-    if lRevistas.exists():
-        for revista in lRevistas:
-            cadenaDeTexto += f"· {revista.titulo}, edición: {revista.numeroEdicion} ({revista.fechaPublicacion})\n"
-    else:
-        cadenaDeTexto += "Esta editorial no tiene revistas publicadas en estos momentos."
+class ListaEditorialesView(ListView):
+    model = Editorial
+    template_name = 'listaEditorial.html'
+    context_object_name = 'editoriales'
+    ordering = ['nombre']
 
-    return HttpResponse(cadenaDeTexto)
+    def render_to_response(self, context, **response_kwargs):
+        if self.request.path.endswith('.txt'):
+            editoriales = Editorial.objects.order_by('nombre')
+            cadenaDeTexto = ', '.join([editorial.nombre for editorial in editoriales])
+            return HttpResponse(cadenaDeTexto)
+        return super().render_to_response(context, **response_kwargs)
 
-def listaRevistas(request):
-    revistas = Revista.objects.order_by('titulo')
-    cadenaDeTexto = ', '.join([revista.titulo for revista in revistas])
-    return HttpResponse(cadenaDeTexto)
 
-def detalleRevista(request, id_revista):
-    revista = get_object_or_404(Revista, pk=id_revista)
-    lProductos = revista.productos.all()
-    cadenaDeTexto = f"{revista.titulo}, edición: {revista.numeroEdicion} ({revista.fechaPublicacion}), editorial: {revista.editorial.nombre}\n"
-    cadenaDeTexto += "Oferta de productos:\n"
+class DetalleEditorialView(DetailView):
+    model = Editorial
+    template_name = 'detalleEditorial.html'
+    context_object_name = 'editorial'
 
-    if lProductos.exists():
-        for producto in lProductos:
-            cadenaDeTexto += f"· {producto.nombreProducto}, precio: {producto.precio}, talla: {producto.talla}, stock: {producto.stock}\n"
-    else:
-        cadenaDeTexto += "Esta revista no tiene productos en estos momentos."
+    def render_to_response(self, context, **response_kwargs):
+        if self.request.path.endswith('.txt'):
+            editorial = self.object
+            lRevistas = editorial.revistas.all()
+            cadenaDeTexto = f"Editorial: {editorial.nombre}, CIF: {editorial.cif}\n"
+            cadenaDeTexto += "Revistas publicadas:\n"
 
-    return HttpResponse(cadenaDeTexto)
+            if lRevistas.exists():
+                for revista in lRevistas:
+                    cadenaDeTexto += f"· {revista.titulo}, edición: {revista.numeroEdicion} ({revista.fechaPublicacion})\n"
+            else:
+                cadenaDeTexto += "Esta editorial no tiene revistas publicadas en estos momentos."
+            return HttpResponse(cadenaDeTexto)
+        return super().render_to_response(context, **response_kwargs)
 
-def listaProductos(request):
-    productos = Producto.objects.order_by('nombreProducto')
-    cadenaDeTexto = "Lista de productos:\n"
 
-    if productos.exists():
-        for producto in productos:
-            cadenaDeTexto += (
-                f"· {producto.nombreProducto}, "
-                f"talla: {producto.talla}, "
-                f"color: {producto.color}, "
-                f"precio: {producto.precio}, "
-                f"stock: {producto.stock}, "
-                f"revista: {producto.revista.titulo if producto.revista else 'Sin revista asociada'}\n"
+class ListaRevistasView(ListView):
+    model = Revista
+    template_name = 'listaRevista.html'
+    context_object_name = 'revistas'
+    ordering = ['titulo']
+
+    def render_to_response(self, context, **response_kwargs):
+        if self.request.path.endswith('.txt'):
+            revistas = Revista.objects.order_by('titulo')
+            cadenaDeTexto = ', '.join([revista.titulo for revista in revistas])
+            return HttpResponse(cadenaDeTexto)
+        return super().render_to_response(context, **response_kwargs)
+
+
+class DetalleRevistaView(DetailView):
+    model = Revista
+    template_name = 'detalle_revista.html'
+    context_object_name = 'revista'
+
+    def render_to_response(self, context, **response_kwargs):
+        if self.request.path.endswith('.txt'):
+            revista = self.object
+            lProductos = revista.productos.all()
+            cadenaDeTexto = (
+                f"{revista.titulo}, edición: {revista.numeroEdicion} ({revista.fechaPublicacion}), "
+                f"editorial: {revista.editorial.nombre}\n"
+                "Oferta de productos:\n"
             )
-    else:
-        cadenaDeTexto += "No hay productos registrados."
 
-    return HttpResponse(cadenaDeTexto)
+            if lProductos.exists():
+                for producto in lProductos:
+                    cadenaDeTexto += (
+                        f"· {producto.nombreProducto}, precio: {producto.precio}, "
+                        f"talla: {producto.talla}, stock: {producto.stock}\n"
+                    )
+            else:
+                cadenaDeTexto += "Esta revista no tiene productos en estos momentos."
 
-def detalleProducto(request, id_producto):
-    producto = get_object_or_404(Producto, pk=id_producto)
-    cadenaDeTexto = (
-        f"{producto.nombreProducto}\n"
-        f"Talla: {producto.talla},\n"
-        f"Color: {producto.color},\n"
-        f"Precio: {producto.precio},\n"
-        f"Stock: {producto.stock},\n"
-        f"Revista: {producto.revista.titulo if producto.revista else 'Sin revista asociada'}"
-    )
-
-    return HttpResponse(cadenaDeTexto)
+            return HttpResponse(cadenaDeTexto)
+        return super().render_to_response(context, **response_kwargs)
 
 
-def listaEditorialHtml(request):
-    lEditoriales = Editorial.objects.order_by('nombre')
-    contexto = {'editoriales': lEditoriales}
-    return render(request, 'listaEditorial.html', contexto)
+class ListaProductosView(ListView):
+    model = Producto
+    template_name = 'listaProducto.html'
+    context_object_name = 'productos'
+    ordering = ['nombreProducto']
 
-def detalleEditorialHtml(request, id_editorial):
-    editorial = get_object_or_404(Editorial, pk=id_editorial)
-    contexto = {'editorial': editorial}
-    return render(request, 'detalleEditorial.html', contexto)
+    def render_to_response(self, context, **response_kwargs):
+        if self.request.path.endswith('.txt'):
+            productos = Producto.objects.order_by('nombreProducto')
+            cadenaDeTexto = "Lista de productos:\n"
 
-def listaRevistasHtml(request):
-    lRevistas = Revista.objects.order_by('titulo')
-    contexto = {'revistas': lRevistas}
-    return render(request, 'listaRevista.html', contexto)
+            if productos.exists():
+                for producto in productos:
+                    cadenaDeTexto += (
+                        f"· {producto.nombreProducto}, talla: {producto.talla}, color: {producto.color}, "
+                        f"precio: {producto.precio}, stock: {producto.stock}, "
+                        f"revista: {producto.revista.titulo if producto.revista else 'Sin revista asociada'}\n"
+                    )
+            else:
+                cadenaDeTexto += "No hay productos registrados."
+            return HttpResponse(cadenaDeTexto)
+        return super().render_to_response(context, **response_kwargs)
 
-def detalleRevistaHtml(request, id_revista):
-    revista = get_object_or_404(Revista, pk=id_revista)
-    contexto = {'revista': revista}
-    #return render(request, 'detalleRevista.html', contexto)
-    return render(request, 'detalle_revista.html', {'revista': revista})
 
-def listaProductosHtml(request):
-    lProductos = Producto.objects.order_by('nombreProducto')
-    contexto = {'productos': lProductos}
-    return render(request, 'listaProducto.html', contexto)
-    
-def detalleProductoHtml(request, id_producto):
-    producto = get_object_or_404(Producto, pk=id_producto)
-    contexto = {'producto': producto}
-    return render(request, 'detalleProducto.html', contexto)
+class DetalleProductoView(DetailView):
+    model = Producto
+    template_name = 'detalleProducto.html'
+    context_object_name = 'producto'
+
+    def render_to_response(self, context, **response_kwargs):
+        if self.request.path.endswith('.txt'):
+            producto = self.object
+            cadenaDeTexto = (
+                f"{producto.nombreProducto}\n"
+                f"Talla: {producto.talla},\n"
+                f"Color: {producto.color},\n"
+                f"Precio: {producto.precio},\n"
+                f"Stock: {producto.stock},\n"
+                f"Revista: {producto.revista.titulo if producto.revista else 'Sin revista asociada'}"
+            )
+            return HttpResponse(cadenaDeTexto)
+        return super().render_to_response(context, **response_kwargs)
