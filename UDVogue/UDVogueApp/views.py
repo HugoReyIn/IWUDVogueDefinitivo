@@ -138,10 +138,11 @@ def contact_view(request):
     if request.method == "POST":
         form = ContactForm(request.POST)
         if form.is_valid():
-            nombre = form.cleaned_data['nombre']
-            return HttpResponse(f"¡Gracias por contactarnos, {nombre}!")
-        else:
-            return HttpResponse("Formulario no válido", status=400)
+            # Process the data in form.cleaned_data (e.g., send an email)
+            print(form.cleaned_data)
+            return render(request, 'contact_success.html')  # A success page
     else:
         form = ContactForm()
+
     return render(request, 'contact.html', {'form': form})
+
