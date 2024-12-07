@@ -201,34 +201,71 @@
       <!-- contact section start -->
       <div id="contact" class="contact_section layout_padding">
          <div class="container">
-             <div class="contact_section_2">
-                 <div class="row">
+            <div class="contact_section_2">
+               <div class="row">
                      <div class="col-md-6">
-                         <div class="mail_section_1">
-                             <h1 class="contact_taital">¡Contáctanos!</h1>
-                             <form method="post">
+                        <div class="mail_section_1">
+                           <h1 class="contact_taital">¡Contáctanos!</h1>
+                           <form id="contactForm">
                                  {% csrf_token %}
-                                 <input type="text" name="{{ form.name.name }}" class="mail_text" placeholder="Nombre" value="{{ form.name.value }}">
-                                 <input type="email" name="{{ form.email.name }}" class="mail_text" placeholder="Correo electrónico" value="{{ form.email.value }}">
-                                 <input type="text" name="{{ form.phone.name }}" class="mail_text" placeholder="Número de teléfono" value="{{ form.phone.value }}">
-                                 <textarea name="{{ form.comments.name }}" class="massage-bt" placeholder="Comentarios" rows="5">{{ form.comments.value }}</textarea>
+                                 <input type="text" name="name" class="mail_text" placeholder="Nombre" required>
+                                 <input type="email" name="email" class="mail_text" placeholder="Correo electrónico" required>
+                                 <input type="text" name="phone" class="mail_text" placeholder="Número de teléfono" required>
+                                 <textarea name="comments" class="massage-bt" placeholder="Comentarios" rows="5" required></textarea>
                                  <div class="subscribe_bt">
-                                     <button type="submit" class="subscribe_bt">ENVIAR</button>
+                                    <button type="submit" class="subscribe_bt">ENVIAR</button>
                                  </div>
-                             </form>
-                         </div>
+                           </form>
+                           <div id="contactResponse" style="margin-top: 15px; display: none;"></div>
+                        </div>
                      </div>
                      <div class="col-md-6">
-                         <div class="map_main">
-                             <div class="map-responsive">
+                        <div class="map_main">
+                           <div class="map-responsive">
                                  <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d410.53283066091524!2d-2.9309043090599958!3d43.26219955019639!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1ses!2ses!4v1732299123201!5m2!1ses!2ses" width="600" height="360" frameborder="0" style="border:0; width: 100%;" allowfullscreen=""></iframe>
-                             </div>
-                         </div>
+                           </div>
+                        </div>
                      </div>
-                 </div>
-             </div>
+               </div>
+            </div>
          </div>
-     </div>
+      </div>
+
+      <script>
+         document.addEventListener("DOMContentLoaded", function () {
+            const contactForm = document.getElementById('contactForm');
+            const contactResponse = document.getElementById('contactResponse');
+
+            contactForm.addEventListener('submit', function (e) {
+               e.preventDefault();
+
+               const formData = new FormData(contactForm);
+
+               fetch("{% url 'contacto' %}", {
+                     method: 'POST',
+                     headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',
+                     },
+                     body: formData,
+               })
+               .then(response => response.json())
+               .then(data => {
+                     contactResponse.style.display = 'block';
+                     if (data.success) {
+                        contactResponse.innerHTML = `<p style="color: green;">¡Gracias por contactarnos! Te responderemos pronto.</p>`;
+                        contactForm.reset(); 
+                     } else {
+                        contactResponse.innerHTML = `<p style="color: red;">Error: ${data.error || 'No se pudo enviar el mensaje. Inténtalo de nuevo.'}</p>`;
+                     }
+               })
+               .catch(error => {
+                     contactResponse.style.display = 'block';
+                     contactResponse.innerHTML = `<p style="color: red;">Error al enviar el formulario. Por favor, inténtalo más tarde.</p>`;
+                     console.error('Error:', error);
+               });
+            });
+         });
+      </script>
       <!-- contact section end -->
 
 
