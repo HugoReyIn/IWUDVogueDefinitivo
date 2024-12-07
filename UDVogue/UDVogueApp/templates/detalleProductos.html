@@ -1,14 +1,23 @@
-{% extends 'base.html' %}
-{%block contenido%}
-    <head>
-        <title>Detalle del Producto</title>
-    </head>
-
-    <body>
-        <h1>Detalle del Producto</h1>
-        <p><strong>Nombre:</strong> {{ producto.nombreProducto }}</p>
-        <p><strong>Precio:</strong> {{ producto.precio }}</p>
-        <p><strong>Stock:</strong> {{ producto.stock }} unidades</p>
-        <p><strong>Revista:</strong> {{ producto.revista.titulo }}</p>
-    </body>
-{%endblock%}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Productos de {{ revista.titulo }}</title>
+</head>
+<body>
+    <h1>Productos de {{ revista.titulo }}</h1>
+    <p>Revista publicada el {{ revista.fechaPublicacion }} por {{ revista.editorial.nombre }}</p>
+    
+    <div class="productos">
+        {% for producto in productos %}
+        <div class="producto">
+            <h2>{{ producto.nombreProducto }}</h2>
+            <img src="{{ producto.imagen.url }}" alt="{{ producto.nombreProducto }}">
+            <p>Talla: {{ producto.talla }}</p>
+            <p>Precio: ${{ producto.precio }}</p>
+        </div>
+        {% empty %}
+        <p>No hay productos disponibles para esta revista.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
