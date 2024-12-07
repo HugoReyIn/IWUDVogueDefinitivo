@@ -84,7 +84,9 @@
                            <h1 class="banner_taital">UDVogue <br> {{ revista.titulo }}</h1>
                         </div>
                         <div class="col-md-6">
-                           <div id="portada2"><img src="{{ revista.imagen.url }}" alt="{{ revista.titulo }}"></div>
+                           <div id="portada2">
+                              <img src="{{ revista.imagen.url }}" alt="{{ revista.titulo }}">
+                           </div>
                         </div>
                      </div>
                   </div>
@@ -97,29 +99,45 @@
 
       <!--  design section start -->
       <div class="design_section layout_padding">
-         <div class="container">
-             <div class="row">
-                 {% for producto in productos %}
-                     <div class="col-md-4">
-                         <div class="box_main">
-                             <p class="chair_text">{{ producto.nombreProducto }}</p>
-                             <div class="image_3">
-                                 <img src="{{ producto.imagen.url }}" alt="{{ producto.nombreProducto }}">
-                             </div>
-                             <p>Precio: {{ producto.precio }} EUR</p>
-                             <p>Talla: {{ producto.talla }}</p>
-                             <div class="buy_bt"><a href="{% url 'detalleProducto' producto.id %}">Ver Detalles</a></div>
-                         </div>
+         <div id="productos_carousel" class="carousel slide" data-ride="carousel">
+            <div class="container">
+               <div class="carousel-inner">
+                  <div class="carousel-item active">
+                     <div class="row">
+                        {% for producto in productos %}
+                           <div class="col-md-4">
+                              <div class="box_main">
+                                 <p class="chair_text">{{ producto.nombreProducto }}</p>
+                                 <div class="image_3">
+                                    <img src="{{ producto.imagen.url }}" alt="{{ producto.nombreProducto }}">
+                                 </div>
+                                 <p>Precio: {{ producto.precio }} EUR</p>
+                                 <p>Talla: {{ producto.talla }}</p>
+                              </div>
+                           </div>
+                           {% if forloop.counter|divisibleby:3 and not forloop.last %}
+                              </div><div class="carousel-item">
+                              <div class="row">
+                           {% endif %}
+                        {% empty %}
+                           <p>No hay productos disponibles en este momento.</p>
+                        {% endfor %}
                      </div>
-                 {% empty %}
-                     <p>No hay productos disponibles en esta revista.</p>
-                 {% endfor %}
-             </div>
+                  </div>
+               </div>        
+            </div>
+            <!-- Controles del carrusel -->
+            <a class="carousel-control-prev" href="#productos_carousel" role="button" data-slide="prev">
+               <i class="fa fa-chevron-left" style="font-size:24px; color: black;"></i>
+            </a>
+            <a class="carousel-control-next" href="#productos_carousel" role="button" data-slide="next">
+               <i class="fa fa-chevron-right" style="font-size:24px; color: black;"></i>
+            </a>   
          </div>
-     </div>   
+      </div>  
       <!--  design section end -->
 
-      
+
       <!-- footer section start -->
       <div class="footer_section">
          <div class="container">
@@ -173,7 +191,6 @@
       </div>
       <!-- copyright section end -->
 
-
       <!-- Javascript files-->
       <script src="{% static 'js/jquery.min.js' %}"></script>
       <script src="{% static 'js/popper.min.js' %}"></script>
@@ -185,9 +202,9 @@
       <script src="{% static 'js/custom.js' %}"></script>
       <!-- javascript --> 
       <script src="{% static 'js/owl.carousel.js' %}"></script>
-      <script src="{% static 'js/uery.fancybox.min.js' %}"></script>
+      <script src="{% static 'js/jquery.fancybox.min.js' %}"></script>
 
-      <!--Codigo que baja hasta el punto deseado moviendo la pantalla-->
+      <!-- Código que baja hasta el punto deseado moviendo la pantalla-->
       <script>
          document.querySelectorAll('a.nav-link').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
