@@ -30,6 +30,30 @@
       <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
       <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
       <link rel="stylesheet" href="{% static 'css/jquery.fancybox.min.css' %}" media="screen">
+
+      <!-- Estilo adicional -->
+      <style>
+         .product-box {
+            margin-bottom: 30px;
+         }
+         .product-box img {
+            width: 100%;
+            height: auto;
+         }
+         .product-details {
+            text-align: center;
+            padding: 10px;
+         }
+         .row .col-md-4 {
+            display: flex;
+            justify-content: center;
+         }
+         @media (max-width: 767px) {
+            .row .col-md-4 {
+               margin-bottom: 20px;
+            }
+         }
+      </style>
    </head>
    <body>
       <!-- header section start -->
@@ -75,20 +99,14 @@
 
       <!-- banner section start -->
       <div class="banner_section layout_padding">
-         <div id="main_slider" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-               <div class="carousel-item active">
-                  <div class="container">
-                     <div class="row">
-                        <div class="col-md-6">
-                           <h1 class="banner_taital">UDVogue <br> {{ revista.titulo }}</h1>
-                        </div>
-                        <div class="col-md-6">
-                           <div id="portada2">
-                              <img src="{{ revista.imagen.url }}" alt="{{ revista.titulo }}">
-                           </div>
-                        </div>
-                     </div>
+         <div class="container">
+            <div class="row">
+               <div class="col-md-6">
+                  <h1 class="banner_taital">UDVogue <br> {{ revista.titulo }}</h1>
+               </div>
+               <div class="col-md-6">
+                  <div id="portada2">
+                     <img src="{{ revista.imagen.url }}" alt="{{ revista.titulo }}">
                   </div>
                </div>
             </div>
@@ -99,42 +117,31 @@
 
       <!--  design section start -->
       <div class="design_section layout_padding">
-         <div id="productos_carousel" class="carousel slide" data-ride="carousel">
-            <div class="container">
-               <div class="carousel-inner">
-                  <div class="carousel-item active">
-                     <div class="row">
-                        {% for producto in productos %}
-                           <div class="col-md-4">
-                              <div class="box_main">
-                                 <p class="chair_text">{{ producto.nombreProducto }}</p>
-                                 <div class="image_3">
-                                    <img src="{{ producto.imagen.url }}" alt="{{ producto.nombreProducto }}">
-                                 </div>
-                                 <p>Precio: {{ producto.precio }} EUR</p>
-                                 <p>Talla: {{ producto.talla }}</p>
-                              </div>
-                           </div>
-                           {% if forloop.counter|divisibleby:3 and not forloop.last %}
-                              </div><div class="carousel-item">
-                              <div class="row">
-                           {% endif %}
-                        {% empty %}
-                           <p>No hay productos disponibles en este momento.</p>
-                        {% endfor %}
+         <div class="container">
+            <div class="row">
+               <!-- Recorremos los productos y mostramos tres por fila -->
+               {% for producto in productos %}
+                  <div class="col-md-4">
+                     <div class="product-box">
+                        <div class="product-image">
+                           <img src="{{ producto.imagen.url }}" alt="{{ producto.nombreProducto }}">
+                        </div>
+                        <div class="product-details">
+                           <h4>{{ producto.nombreProducto }}</h4>
+                           <p>Precio: {{ producto.precio }} EUR</p>
+                           <p>Talla: {{ producto.talla }}</p>
+                        </div>
                      </div>
                   </div>
-               </div>        
+                  {% if forloop.counter|divisibleby:3 and not forloop.last %}
+                     </div><div class="row">
+                  {% endif %}
+               {% empty %}
+                  <p>No hay productos disponibles en este momento.</p>
+               {% endfor %}
             </div>
-            <!-- Controles del carrusel -->
-            <a class="carousel-control-prev" href="#productos_carousel" role="button" data-slide="prev">
-               <i class="fa fa-chevron-left" style="font-size:24px; color: black;"></i>
-            </a>
-            <a class="carousel-control-next" href="#productos_carousel" role="button" data-slide="next">
-               <i class="fa fa-chevron-right" style="font-size:24px; color: black;"></i>
-            </a>   
          </div>
-      </div>  
+      </div>
       <!--  design section end -->
 
 
