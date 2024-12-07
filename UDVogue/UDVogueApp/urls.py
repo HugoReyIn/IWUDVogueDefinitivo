@@ -20,5 +20,5 @@ urlpatterns = [
     path('revista/<int:revista_id>/productos/', views.ProductosPorRevistaView.as_view(), name='productosPorRevista'),
 
     path('productos/', ListaProductosView.as_view(), name='listaProductos'),
-    path('productos/<int:pk>/', DetalleProductoView.as_view(), name='detalleProducto'),
+    path('productos/<int:pk>/', DetalleProductoView.as_view(), name='detalleProducto'), 
 ]

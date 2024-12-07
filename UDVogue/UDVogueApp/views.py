@@ -9,7 +9,7 @@ class IndexView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        lRevistas = Revista.objects.all()
+        lRevistas = Revista.objects.prefetch_related('productos').all()
         context['gruposRevistas'] = [lRevistas[i:i+3] for i in range(0, len(lRevistas), 3)]
         return context
 
@@ -166,6 +166,6 @@ class ProductosPorRevistaView(ListView):
         context = super().get_context_data(**kwargs)
         revista_id = self.kwargs['revista_id']
         revista = get_object_or_404(Revista, id=revista_id)
-        context['revista'] = revista
+        context['revista'] = revista 
         return context
 
