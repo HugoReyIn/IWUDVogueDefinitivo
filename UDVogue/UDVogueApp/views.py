@@ -138,11 +138,27 @@ def contact_view(request):
     if request.method == "POST":
         form = ContactForm(request.POST)
         if form.is_valid():
-            # Process the data in form.cleaned_data (e.g., send an email)
             print(form.cleaned_data)
-            return render(request, 'contact_success.html')  # A success page
+            return render(request, 'contactSuccess.html')
     else:
         form = ContactForm()
 
     return render(request, 'contact.html', {'form': form})
+
+class ProductosPorRevistaView(ListView):
+    model = Producto
+    template_name = 'detalleProductos.html'
+    context_object_name = 'productos'
+
+    def get_queryset(self):
+        revista_id = self.kwargs['revista_id']
+        revista = get_object_or_404(Revista, id=revista_id)
+        return revista.productos.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        revista_id = self.kwargs['revista_id']
+        revista = get_object_or_404(Revista, id=revista_id)
+        context['revista'] = revista
+        return context
 

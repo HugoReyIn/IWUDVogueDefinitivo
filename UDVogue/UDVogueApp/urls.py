@@ -17,9 +17,8 @@ urlpatterns = [
     
     path('revistas/', ListaRevistasView.as_view(), name='listaRevistas'),
     path('revistas/<int:pk>/', DetalleRevistaView.as_view(), name='detalleRevista'),
+    path('revista/<int:revista_id>/productos/', views.ProductosPorRevistaView.as_view(), name='productosPorRevista'),
 
     path('productos/', ListaProductosView.as_view(), name='listaProductos'),
     path('productos/<int:pk>/', DetalleProductoView.as_view(), name='detalleProducto'),
 ]
-from django.urls import path
-from . import views
