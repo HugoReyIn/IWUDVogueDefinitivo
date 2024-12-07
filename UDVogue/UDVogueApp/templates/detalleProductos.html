@@ -1,17 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Productos de {{ revista.titulo }}</title>
-</head>
-<body>
-    <h1>Productos de {{ revista.titulo }}</h1>
-    <p>Revista publicada el {{ revista.fechaPublicacion }} por {{ revista.editorial.nombre }}</p>
-    
-    
-</body>
-</html>
-
-
 {% load static %}
 
 <!DOCTYPE html>
@@ -95,11 +81,7 @@
                   <div class="container">
                      <div class="row">
                         <div class="col-md-6">
-                           <h1 class="banner_taital">Elegancia <br> en cada <br>detalle</h1>
-                           <p class="banner_text"> Descubre prendas únicas y accesorios exclusivos donde cada detalle respira elegancia y sofisticación. ¡Tu estilo merece lo mejor! </p>
-                           <div class="btn_main">
-                              <div class="contact_bt"><a href="#">¡Contáctanos!</a></div>
-                           </div>
+                           <h1 class="banner_taital">{{ revista.titulo }}</h1>
                         </div>
                         <div class="col-md-6">
                            <div id="portada1"><img src="{% static 'images/Portada1.png' %}"></div>
@@ -107,29 +89,7 @@
                      </div>
                   </div>
                </div>
-               <div class="carousel-item">
-                  <div class="container">
-                     <div class="row">
-                        <div class="col-md-6">
-                           <h1 class="banner_taital">Sencillez <br> con gran <br>estilo</h1>
-                           <p class="banner_text">Descubre la magia de lo simple con prendas casuales que combinan comodidad y distinción. ¡Un look que habla por ti!</p>
-                           <div class="btn_main">
-                              <div class="contact_bt"><a href="#">¡Contáctanos!</a></div>
-                           </div>
-                        </div>
-                        <div class="col-md-6">
-                           <div id="portada2"><img src="{% static 'images/Portada2.png' %}"></div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
             </div>
-            <a class="carousel-control-prev" href="#main_slider" role="button" data-slide="prev">
-            <i style="font-style: initial;"><<</i>
-            </a>
-            <a class="carousel-control-next" href="#main_slider" role="button" data-slide="next">
-            <i style="font-style: initial;">>></i>
-            </a>
          </div>
       </div>
       <!-- banner section end -->
@@ -138,27 +98,41 @@
       <!--  design section start -->
       <div class="design_section layout_padding">
         <div id="my_slider" class="carousel slide" data-ride="carousel">
-            <div class="productos">
-                {% for producto in productos %}
-                <div class="producto">
-                    <h2>{{ producto.nombreProducto }}</h2>
-                    <img src="{{ producto.imagen.url }}" alt="{{ producto.nombreProducto }}">
-                    <p>Talla: {{ producto.talla }}</p>
-                    <p>Precio: ${{ producto.precio }}</p>
-                </div>
-                {% empty %}
-                <p>No hay productos disponibles para esta revista.</p>
-                {% endfor %}
-            </div>
-            <a class="carousel-control-prev" href="#my_slider" role="button" data-slide="prev">
-               <i class="fa fa-long-arrow-left" style="font-size:24px"></i>
-            </a>
-            <a class="carousel-control-next" href="#my_slider" role="button" data-slide="next">
-               <i class="fa fa-long-arrow-right" style="font-size:24px"></i>
-            </a>
-         </div>
-         <div class="extraContainer"></div>
-      </div>
+           <div id="revistas" class="carousel-inner">
+            {% for grupo in gruposProductos %}
+              <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                 <div class="container" id="Revistas">
+                    <h1 class="design_taital">Nuestras revistas</h1>
+                    <p class="design_text">¡Descubre el producto perfecto en nuestra amplia colección de revistas, donde siempre encontrarás algo único para ti!</p>
+                    <div class="design_section_2">
+                       <div class="row">
+                        {% for producto in grupo %}
+                          <div class="col-md-4">
+                             <div class="box_main">
+                                <p class="chair_text">{{ producto.nombreProducto }}</p>
+                                <div class="image_3">
+                                   <img src="{{ producto.imagen.url }}" alt="{{ producto.id }}">
+                                   <p>Precio: {{ producto.precio }}€</p>
+                                   <p>Talla: {{ producto.talla }}</p>
+                                </div>
+                             </div>
+                          </div>
+                          {% endfor %}
+                       </div>
+                    </div>
+                 </div>
+              </div>
+              {% endfor %}
+           </div>
+           <a class="carousel-control-prev" href="#my_slider" role="button" data-slide="prev">
+              <i class="fa fa-long-arrow-left" style="font-size:24px"></i>
+           </a>
+           <a class="carousel-control-next" href="#my_slider" role="button" data-slide="next">
+              <i class="fa fa-long-arrow-right" style="font-size:24px"></i>
+           </a>
+        </div>
+        <div class="extraContainer"></div>
+     </div>
       <!--  design section end -->
 
       

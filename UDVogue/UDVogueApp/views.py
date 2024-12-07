@@ -97,6 +97,12 @@ class ListaProductosView(ListView):
     context_object_name = 'productos'
     ordering = ['nombreProducto']
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        productos = Producto.objects.all()
+        context['gruposProductos'] = [productos[i:i+3] for i in range(0, len(productos), 3)]
+        return context
+
     def render_to_response(self, context, **response_kwargs):
         if self.request.path.endswith('.txt'):
             productos = Producto.objects.order_by('nombreProducto')
@@ -113,6 +119,7 @@ class ListaProductosView(ListView):
                 cadenaDeTexto += "No hay productos registrados."
             return HttpResponse(cadenaDeTexto)
         return super().render_to_response(context, **response_kwargs)
+
 
 
 class DetalleProductoView(DetailView):
