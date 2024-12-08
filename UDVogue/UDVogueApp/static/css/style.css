@@ -271,6 +271,8 @@ button {
     color: whitesmoke;
     font-size: 14px;
     text-transform: uppercase;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .navbar-light .navbar-nav .nav-link:focus,
