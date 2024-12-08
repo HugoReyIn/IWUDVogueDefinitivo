@@ -5,7 +5,7 @@ from .models import Editorial, Revista, Producto
 from .forms import ContactForm
 
 class IndexView(TemplateView):
-    template_name = 'index.html'
+    template_name = 'base.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

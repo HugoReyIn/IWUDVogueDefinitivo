@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{%block contenido%}
+    <head>
+        <title>Lista de Revistas</title>
+    </head>
+    <body>
+        <h1>Lista de Revistas</h1>
+        <ul>
+            {% for revista in revistas %}
+                <li>
+                    <a href="{% url 'detalleRevistaHtml' revista.id %}">
+                        {{ revista.titulo }}. Publicada el {{ revista.fechaPublicacion }}, edición {{ revista.numeroEdicion }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </body>
+{%endblock%}
