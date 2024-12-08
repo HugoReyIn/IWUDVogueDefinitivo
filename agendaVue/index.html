@@ -82,6 +82,7 @@
         </div>
     </header>
 
+<div id ="app">
     <!-- Contactos Grid Section -->
     <section id="contactos">
         <div class="container">
@@ -103,26 +104,36 @@
                     <h4>Teléfono</h4>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-4">
-                    <p>John Doe</p>
+
+            <div class="row" v-if="lContactos.length > 0">
+                <div v-for="(contacto, index) in lContactos" :key="index" class="row" itemscope itemtype="http://schema.org/Person">
+                    <script type="application/ld+json">
+                    {
+                      "@context": "http://schema.org",
+                      "@type": "Person",
+                      "name": "{{ contacto.nombre }}",
+                      "email": "{{ contacto.email }}",
+                      "telephone": "{{ contacto.telefono }}"
+                    }
+                    </script>
+                    <div class="col-xs-4">
+                        <p itemprop="name">{{ contacto.nombre }}</p>
+                    </div>
+                    <div class="col-xs-4">
+                        <p itemprop="email">{{ contacto.email }}</p>
+                    </div>
+                    <div class="col-xs-3">
+                        <p itemprop="telephone">{{ contacto.telefono }}</p>
+                    </div>
+                    <div class="col-xs-1">
+                        <button class="btn btn-danger btn-sm" @click="eliminarContacto(index)">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </div>
                 </div>
-                <div class="col-xs-4">
-                    <p>john.doe@deusto.es</p>
-                </div>
-                <div class="col-xs-3">
-                    <p>555555555</p>
-                </div>
-                <div class="col-xs-1">
-                      <button class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove"></span></button>
-                </div>
-            </div>
-            </div>
-            <div>
-              <div class="row">
-                  <div class="col-xs-12">
-                      <p>No se ha encontrado ningún contacto.</p>
-                  </div>
+              </div>
+              <div v-else>
+                <p>No se ha encontrado ningún contacto.</p>
               </div>
             </div>
         </div>
@@ -139,40 +150,37 @@
             </div>
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2">
-                    <form name="sentMessage" id="contactForm" novalidate>
+                    <form @submit.prevent="agregarContacto">
                         <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Nombre</label>
-                                <input type="text" class="form-control" placeholder="Nombre" id="name">
-                                <p class="help-block text-danger"></p>
-                            </div>
+                          <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>Nombre</label>
+                            <input type="text" class="form-control" placeholder="Nombre" v-model="annadirContacto.nombre">
+                          </div>
                         </div>
                         <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Email</label>
-                                <input type="email" class="form-control" placeholder="Email" id="email">
-                                <p class="help-block text-danger"></p>
-                            </div>
+                          <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>Email</label>
+                            <input type="email" class="form-control" placeholder="Email" v-model="annadirContacto.email">
+                          </div>
                         </div>
                         <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Teléfono</label>
-                                <input type="tel" class="form-control" placeholder="Número de teléfono" id="phone">
-                                <p class="help-block text-danger"></p>
-                            </div>
+                          <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>Teléfono</label>
+                            <input type="tel" class="form-control" placeholder="Número de teléfono" v-model="annadirContacto.telefono">
+                          </div>
                         </div>
                         <br>
-                        <div id="success"></div>
                         <div class="row">
-                            <div class="form-group col-xs-12">
-                                <button type="submit" class="btn btn-success btn-lg">Añadir</button>
-                            </div>
+                          <div class="form-group col-xs-12">
+                            <button type="submit" class="btn btn-success btn-lg">Añadir</button>
+                          </div>
                         </div>
-                    </form>
+                      </form>
                 </div>
             </div>
         </div>
     </section>
+</div>
 
     <!-- About Section -->
     <section class="success" id="about">
@@ -230,7 +238,39 @@
     <script src="js/freelancer.js"></script>
     
     <!-- Vue -->
-    <script src="js/vue.js"></script>   
+    <script src="js/vue.js"></script>
+    <script>
+        new Vue({
+          el: '#app',
+          data: {
+            lContactos: [
+                { nombre: 'Izaro Serrano', email: 'i.serrano@opendeusto.com', telefono: '654290322' },
+                { nombre: 'Ainhoa Ezkurdia', email: 'a.ezkurdia@opendeusto.com', telefono: '656583102' },
+                { nombre: 'Genesis Balcazar', email: 'g.balcazar@opendeusto.com', telefono: '689124570' },
+                { nombre: 'Hugo Rey', email: 'hugo.rey@opendeusto.com', telefono: '623413952' },
+                { nombre: 'Asier González', email: 'gonzalez.asier@deusto.es', telefono: '655012037' }],
+
+            annadirContacto: {
+              nombre: '',
+              email: '',
+              telefono: ''
+            }
+          },
+          methods: {
+            agregarContacto() {
+              if (this.annadirContacto.nombre && this.annadirContacto.email && this.annadirContacto.telefono) {
+                this.lContactos.push({ ...this.annadirContacto }); 
+                this.annadirContacto = { nombre: '', email: '', telefono: '' }; 
+              } else {
+                alert('Por favor, completa todos los campos');
+              }
+            },
+            eliminarContacto(index) {
+              this.lContactos.splice(index, 1);
+            }
+          }
+        });
+      </script>
 
 </body>
 
